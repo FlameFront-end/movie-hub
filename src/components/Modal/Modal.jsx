@@ -11,7 +11,7 @@ const Modal = props => {
 
 	return (
 		<div id={props.id} className={`modal ${active ? 'active' : ''}`}>
-			Modal
+			{props.children}
 		</div>
 	)
 }
@@ -32,7 +32,7 @@ export const ModalContent = props => {
 	return (
 		<div ref={contentRef} className='modal__content'>
 			{props.children}
-			<div className='modal__conent__close' onClick={closeModal}>
+			<div className='modal__content__close' onClick={closeModal}>
 				<i className='bx bx-x'></i>
 			</div>
 		</div>
