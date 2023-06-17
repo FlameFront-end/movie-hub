@@ -37,6 +37,7 @@ const HeroSlide = () => {
 				spaceBetween={0}
 				slidesPerView={1}
 				autoplay={{ delay: 3000 }}
+				effect='fade'
 			>
 				{movieItems.map((item, index) => (
 					<SwiperSlide key={index}>
