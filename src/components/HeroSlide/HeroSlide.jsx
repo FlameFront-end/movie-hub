@@ -10,8 +10,9 @@ import './HeroSlide.scss'
 import Modal, { ModalContent } from '../Modal/Modal'
 
 const HeroSlide = () => {
-	const [movieItems, setMovieItems] = useState([])
 	SwiperCore.use([Autoplay])
+
+	const [movieItems, setMovieItems] = useState([])
 
 	useEffect(() => {
 		const getMovies = async () => {
@@ -22,8 +23,8 @@ const HeroSlide = () => {
 				})
 				setMovieItems(response.results.slice(1, 4))
 				console.log(response)
-			} catch (e) {
-				console.log('error', e)
+			} catch {
+				console.log('error')
 			}
 		}
 		getMovies()
@@ -32,15 +33,14 @@ const HeroSlide = () => {
 	return (
 		<div className='hero-slide'>
 			<Swiper
-				modulee={[Autoplay]}
+				modules={[Autoplay]}
 				grabCursor={true}
 				spaceBetween={0}
 				slidesPerView={1}
-				autoplay={{ delay: 3000 }}
-				effect='fade'
+				// autoplay={{delay: 3000}}
 			>
-				{movieItems.map((item, index) => (
-					<SwiperSlide key={index}>
+				{movieItems.map((item, i) => (
+					<SwiperSlide key={i}>
 						{({ isActive }) => (
 							<HeroSlideItem
 								item={item}
@@ -50,29 +50,28 @@ const HeroSlide = () => {
 					</SwiperSlide>
 				))}
 			</Swiper>
-			{movieItems.map((item, index) => (
-				<TrailerModal key={index} item={item} />
+			{movieItems.map((item, i) => (
+				<TrailerModal key={i} item={item} />
 			))}
 		</div>
 	)
 }
+
 const HeroSlideItem = props => {
-	const navigate = useNavigate()
+	let navigate = useNavigate()
 
 	const item = props.item
+
 	const background = apiConfig.originalImage(
 		item.backdrop_path ? item.backdrop_path : item.poster_path
 	)
 
 	const setModalActive = async () => {
 		const modal = document.querySelector(`#modal_${item.id}`)
-		console.log(modal)
 
 		const videos = await tmdbApi.getVideos(category.movie, item.id)
-		console.log(videos.results)
 
 		if (videos.results.length > 0) {
-			console.log('key', videos.results[0].key)
 			const videSrc = 'https://www.youtube.com/embed/' + videos.results[0].key
 			modal
 				.querySelector('.modal__content > iframe')
@@ -91,7 +90,7 @@ const HeroSlideItem = props => {
 		>
 			<div className='hero-slide__item__content container'>
 				<div className='hero-slide__item__content__info'>
-					<h2 className='title'>{props.title}</h2>
+					<h2 className='title'>{item.title}</h2>
 					<div className='overview'>{item.overview}</div>
 					<div className='btns'>
 						<MyButton onClick={() => navigate('/movie/' + item.id)}>
@@ -102,8 +101,8 @@ const HeroSlideItem = props => {
 						</OutlineButton>
 					</div>
 				</div>
-				<div className='hero-slide__item__content__info'>
-					<img src={apiConfig.w500lImage(item.poster_path)} alt='poster' />
+				<div className='hero-slide__item__content__poster'>
+					<img src={apiConfig.w500lImage(item.poster_path)} alt='' />
 				</div>
 			</div>
 		</div>
@@ -115,9 +114,7 @@ const TrailerModal = props => {
 
 	const iframeRef = useRef(null)
 
-	const onClose = () => {
-		iframeRef.current.setAttribute('src', '')
-	}
+	const onClose = () => iframeRef.current.setAttribute('src', '')
 
 	return (
 		<Modal active={false} id={`modal_${item.id}`}>

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Catalog from '../pages/Catalog'
-import Detail from '../pages/Detail'
 import Home from '../pages/Home'
+import Detail from '../pages/Detail/Detail'
 
 const MyRoutes = () => {
 	return (
