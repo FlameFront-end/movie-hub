@@ -34,7 +34,15 @@ const Footer = () => {
 						<Link to='/'>You mus watch</Link>
 						<Link to='/'>Recent release</Link>
 						<Link to='/'>Top IMDB</Link>
-						<Link to='/'>FlameFront-end</Link>
+						<Link
+							to='https://flamefront-end.github.io/kaliganov-frontend/'
+							target='_blank'
+						>
+							Artem Kaliganov
+						</Link>
+						<Link to='https://github.com/FlameFront-end' target='_blank'>
+							GitHub
+						</Link>
 					</div>
 				</div>
 			</div>
