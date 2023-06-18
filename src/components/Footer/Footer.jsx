@@ -18,7 +18,6 @@ const Footer = () => {
 				<div className='footer__content__menus'>
 					<div className='footer__content__menu'>
 						<Link to='/'>Home</Link>
-						<Link to='/'>Home</Link>
 						<Link to='/'>Contact us</Link>
 						<Link to='/'>Term of services</Link>
 						<Link to='/'>About us</Link>
@@ -33,7 +32,6 @@ const Footer = () => {
 					<div className='footer__content__menu'>
 						<Link to='/'>You mus watch</Link>
 						<Link to='/'>Recent release</Link>
-						<Link to='/'>Top IMDB</Link>
 						<Link
 							to='https://flamefront-end.github.io/kaliganov-frontend/'
 							target='_blank'
